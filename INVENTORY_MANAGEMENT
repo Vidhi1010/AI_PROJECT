@@ -1,0 +1,59 @@
+#include <iostream>
+#include <vector>
+
+class Product {
+public:
+    int id;
+    std::string name;
+    double price;
+    int quantity;
+
+    Product(int _id, std::string _name, double _price, int _quantity) :
+        id(_id), name(_name), price(_price), quantity(_quantity) {}
+};
+
+class Inventory {
+public:
+    std::vector<Product> products;
+
+    void add_product(Product product) {
+        products.push_back(product);
+    }
+
+    void remove_product(Product product) {
+        for (auto it = products.begin(); it != products.end(); ++it) {
+            if (it->id == product.id) {
+                products.erase(it);
+                break;
+            }
+        }
+    }
+
+    void update_quantity(Product product, int quantity) {
+        for (auto& p : products) {
+            if (p.id == product.id) {
+                p.quantity = quantity;
+                break;
+            }
+        }
+    }
+};
+
+int main() {
+    Inventory inventory;
+    Product p1(1, "Product 1", 10.99, 100);
+    Product p2(2, "Product 2", 5.99, 50);
+
+    inventory.add_product(p1);
+    inventory.add_product(p2);
+
+    inventory.remove_product(p1);
+
+    inventory.update_quantity(p2, 25);
+
+    for (const auto& p : inventory.products) {
+        std::cout << "Product ID: " << p.id << ", Name: " << p.name << ", Price: $" << p.price << ", Quantity: " << p.quantity << std::endl;
+    }
+
+    return 0;
+}
