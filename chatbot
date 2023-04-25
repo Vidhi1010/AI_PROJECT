@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+// Product struct
+struct Product {
+    string name;
+    double price;
+};
+
+// Product database
+vector<Product> products = {
+    {"T-Shirt", 19.99},
+    {"Jeans", 39.99},
+    {"Sneakers", 59.99},
+    {"Backpack", 29.99}
+};
+
+int main() {
+    string name;
+    cout << "Hi! Welcome to our e-commerce website. What's your name?" << endl;
+    cin >> name;
+    cout << "Nice to meet you, " << name << "!" << endl;
+    
+    string message;
+    while (true) {
+        cout << "How can I help you today? ";
+        getline(cin, message);
+        
+        if (message == "bye") {
+            cout << "Goodbye, " << name << "! Thank you for shopping with us." << endl;
+            break;
+        } else if (message == "What do you sell?") {
+            cout << "We sell a variety of products including: " << endl;
+            for (Product p : products) {
+                cout << "- " << p.name << " ($" << p.price << ")" << endl;
+            }
+        } else if (message == "What's in my cart?") {
+            cout << "Sorry, we don't currently have a cart feature on our website. Please proceed to checkout for any items you would like to purchase." << endl;
+        } else if (message == "How do I checkout?") {
+            cout << "To checkout, simply proceed to the checkout page and follow the prompts to complete your purchase." << endl;
+        } else {
+            cout << "I'm sorry, I didn't understand what you said." << endl;
+        }
+    }
+    
+    return 0;
+}
+
